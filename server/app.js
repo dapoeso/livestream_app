@@ -1,4 +1,5 @@
 const express = require('express'),
+    path = require('path'),
     Session = require('express-session'),
     bodyParse = require('body-parser'),
     mongoose = require('mongoose'),
@@ -6,12 +7,13 @@ const express = require('express'),
     FileStore = require('session-file-store')(Session),
     config = require('./config/default'),
     flash = require('connect-flash'),
-    passport = require('./auth/passport'),
+    // passport = require('./auth/passport'),
+    node_media_server = require('./media_server'),
     port = 3333,
     app = express();
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'));
@@ -39,3 +41,5 @@ app.get('*', middleware.ensureLoggedIn(), (req, res) => {
 });
 
 app.listen(port, () => console.log(`App listening on ${port}!`));
+
+node_media_server.run();
