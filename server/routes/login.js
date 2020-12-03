@@ -21,3 +21,4 @@ router.post('/', passport.authenticate('localLogin', {
 }));
 
 module.exports = router;
+
